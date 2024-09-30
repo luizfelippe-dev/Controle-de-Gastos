@@ -29,13 +29,14 @@ def add_expense(name, value, payment_date):
     conn.commit()
     conn.close()
 
-def add_gain(name, value):
+def add_gain(name, value, payment_date):
     conn = sqlite3.connect('expenses.db')
     cursor = conn.cursor()
 
-    cursor.execute('INSERT INTO expenses (name, value, payment_date, type) VALUES (?, ?, ?, ?)', (name, value, None, 'gain'))
+    cursor.execute('INSERT INTO expenses (name, value, payment_date, type) VALUES (?, ?, ?, ?)', (name, value, payment_date, 'gain'))
     conn.commit()
     conn.close()
+
 
 
 # Função para buscar todas as despesas/ganhos
@@ -71,7 +72,7 @@ def remove_expense(expense_id):
     conn.commit()
     conn.close()
 
-    def add_recurring_expense(name, value, day_of_month):
+def add_recurring_expense(name, value, day_of_month):
         conn = sqlite3.connect('expenses.db')
         cursor = conn.cursor()
 
@@ -79,15 +80,7 @@ def remove_expense(expense_id):
         conn.commit()
         conn.close()
 
-    def mark_as_paid(expense_id):
-        conn = sqlite3.connect('expenses.db')
-        cursor = conn.cursor()
-
-        cursor.execute('UPDATE expenses SET is_paid = 1 WHERE id = ?', (expense_id,))
-        conn.commit()
-        conn.close()
-
-    def mark_as_paid(expense_id):
+def mark_as_paid(expense_id):
         conn = sqlite3.connect('expenses.db')
         cursor = conn.cursor()
 
